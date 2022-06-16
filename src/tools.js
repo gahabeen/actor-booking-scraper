@@ -37,7 +37,7 @@ const getRequestFnc = (session, proxy, locale = DEFAULT_LOCALE) => async (url, o
             headers: {
                 'X-Airbnb-API-Key': process.env.API_KEY,
             },
-            proxyUrl: proxy.newUrl(session ? session.id : `airbnb_${Math.floor(Math.random() * 100000000)}`),
+            proxyUrl: proxy.newUrl((session || {}).id),
             abortFunction: (res) => {
                 const { statusCode } = res;
                 return statusCode !== 200;
